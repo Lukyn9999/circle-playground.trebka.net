@@ -1,33 +1,41 @@
-const menuToggle = document.getElementById('menu-toggle');
 const slideMenu = document.getElementById('slide-menu');
-const closeMenu = document.getElementById('close-menu');
 const applyButton = document.getElementById('apply-btn');
+const toggleButton = document.getElementById('menu-toggle');
 
 slideMenu.style.left = '0';
+let menuOpened = true;
 
 //disable right click
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
 
-menuToggle.addEventListener('click', () => {
-    slideMenu.style.left = '0';
-});
+toggleButton.addEventListener('click', () => {
+    if (menuOpened) {
+        slideMenu.style.left = '-260px';
+        toggleButton.style.left = '0px';
+        toggleButton.textContent = ">";
 
-closeMenu.addEventListener('click', () => {
-    slideMenu.style.left = '-260px';
+        menuOpened = false;
+    } else {
+        slideMenu.style.left = '0';
+        toggleButton.style.left = '250px';
+        toggleButton.textContent = "X";
+
+        menuOpened = true;
+    }
 });
 
 let inactivityTimeout;
 
 function showMenuButton() {
     document.body.classList.remove('cursor-hidden');
-    menuToggle.classList.remove('hidden');
+    toggleButton.classList.remove('hidden');
 }
 
 function hideMenuButton() {
     document.body.classList.add('cursor-hidden');
-    menuToggle.classList.add('hidden');
+    toggleButton.classList.add('hidden');
 }
 
 document.addEventListener('mousemove', () => {
@@ -78,7 +86,8 @@ const ctx = canvas.getContext('2d');
 //MOUSE
 
 let mouse = { x: null, y: null };
-let isMouseDown = false;
+let isLeftMouseDown = false;
+let isRightMouseDown = false;
 
 canvas.addEventListener('mousemove', (event) => {
     mouse.x = event.clientX;
@@ -93,13 +102,17 @@ canvas.addEventListener('mouseleave', () => {
 canvas.addEventListener('mousedown', (event) => {
 
     if (event.button === 0) {
-        isMouseDown = true;
+        isLeftMouseDown = true;
+    } else if (event.button == 2) {
+        isRightMouseDown = true;
     }
 });
 
 canvas.addEventListener('mouseup', (event) => {
     if (event.button === 0) {
-        isMouseDown = false;
+        isLeftMouseDown = false;
+    } else if (event.button == 2) {
+        isRightMouseDown = false;
     }
 });
 
@@ -136,6 +149,7 @@ function updateCircles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     for (let i = 0; i < circles.length; i++) {
         let circle = circles[i];
@@ -145,13 +159,15 @@ function updateCircles() {
             let dy = circle.y - mouse.y;
             let distance = Math.hypot(dx, dy);
 
-            if (isMouseDown) {
+            if (isLeftMouseDown) {
+
                 let angle = Math.atan2(dy, dx);
                 let attractForce = (mouseRepelDistance - distance) / mouseRepelDistance;
 
                 circle.speedX += Math.cos(angle) * attractForce * circleSpeed;
                 circle.speedY += Math.sin(angle) * attractForce * circleSpeed;
-            } else {
+            } else if (isRightMouseDown) {
+
                 if (distance < mouseRepelDistance) {
                     let angle = Math.atan2(dy, dx);
                     let repelForce = (mouseRepelDistance - distance) / mouseRepelDistance;

@@ -13,11 +13,23 @@
 </head>
 
 <body>
-    <button id="menu-toggle">Settings</button>
-
     <div id="slide-menu" class="slide-menu">
-        <button id="apply-btn" class="apply-btn">Apply</button>
-        <button id="close-menu" class="close-btn">Close</button>
+        <button id="menu-toggle">X</button>
+
+        <div id="info">
+            <h3>Welcome to Circle Playground</h3>
+            <p>You can do what you want here!</p>
+            <p>If you scroll down there are settings you can configure</p>
+            <p>Changing setting values to high number is not recomended cus it can freeze your browser</p>
+            <p>Just keep in mind you have to click Apply button everytime you change settings</p>
+            <h4>Controls: </h4>
+            <p>Right click to repel circles</p>
+            <p>Left click to grab circles</p>
+            <h4>Enjoy!</h4>
+            <p>Source code is on <a href="https://github.com/Lukyn9999/circle-playground.trebka.net" target="_blank"
+                    id="github_link">github</a></p>
+        </div>
+
         <ul>
             <li>
                 <p>Circle count</p>
@@ -33,7 +45,7 @@
             </li>
             <li>
                 <p>Circle connect radius</p>
-                <input type="number" value=150 step=1 min=0.1 id="circle_connect_radius"><br>
+                <input type="number" value=100 step=1 min=0.1 id="circle_connect_radius"><br>
             </li>
             <li>
                 <p>Circle color</p>
@@ -48,21 +60,18 @@
             </li>
             <li>
                 <p>Circle mouse repel distance</p>
-                <input type="number" value=200 step=1 min=0 id="circle_mouse_repel_distance"><br>
+                <input type="number" value=300 step=1 min=0 id="circle_mouse_repel_distance"><br>
             </li>
             <li>
                 <p>Circle mouse repel friction</p>
                 <input type="number" value=0.99 step=0.01 min=0.1 id="circle_mouse_repel_friction"><br>
             </li>
+            <li>
+                <button id="apply-btn" class="apply-btn">Apply</button>
+            </li>
         </ul>
 
-        <div id="info">
-            <p>Controls: </p>
-            <p>Move mouse to repel circles</p>
-            <p>Left mouse button: grab circles</p>
-            <br>
-            <p>Source code on <a href="https://github.com/Lukyn9999/circle-playground.trebka.net" target="_blank">github</a></p>
-        </div>
+
     </div>
 
     <canvas id="canvas"></canvas>
