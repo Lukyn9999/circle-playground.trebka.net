@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Playground</title>
+    <link rel="stylesheet" href="circle-playground.css">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <button id="menu-toggle">Settings</button>
+
+    <div id="slide-menu" class="slide-menu">
+        <button id="apply-btn" class="apply-btn">Apply</button>
+        <button id="close-menu" class="close-btn">Close</button>
+        <ul>
+            <li>
+                <p>Circle count</p>
+                <input type="number" value=100 step=1 min=1 id="circle_count"><br>
+            </li>
+            <li>
+                <p>Circle speed</p>
+                <input type="number" value=0.2 step=0.1 min=0 id="circle_speed"><br>
+            </li>
+            <li>
+                <p>Circle radius</p>
+                <input type="number" value=4 step=0.5 min=0.1 id="circle_radius"><br>
+            </li>
+            <li>
+                <p>Circle connect radius</p>
+                <input type="number" value=150 step=1 min=0.1 id="circle_connect_radius"><br>
+            </li>
+            <li>
+                <p>Circle color</p>
+                <input type="color" value=#5B5B5B id="circle_color"><br>
+            </li>
+            <li>
+                <p>Circle connect color</p>
+                <input type="color" value=#CECECE id="circle_connect_color"><br>
+            </li>
+            <li>
+                <h2>Interaction</h2>
+            </li>
+            <li>
+                <p>Circle mouse repel distance</p>
+                <input type="number" value=200 step=1 min=0 id="circle_mouse_repel_distance"><br>
+            </li>
+            <li>
+                <p>Circle mouse repel friction</p>
+                <input type="number" value=0.99 step=0.01 min=0.1 id="circle_mouse_repel_friction"><br>
+            </li>
+        </ul>
+
+        <div id="info">
+            <p>Controls: </p>
+            <p>Move mouse to repel circles</p>
+            <p>Left mouse button: grab circles</p>
+            <br>
+            <p>Source code on <a href="https://google.com" target="_blank">github</a></p>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script src="circle-playground.js"></script>
+</body>
+
+</html>
