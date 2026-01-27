@@ -3,6 +3,7 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QGKRZVCYP"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -11,6 +12,7 @@
 
         gtag('config', 'G-4QGKRZVCYP');
     </script>
+
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,73 +25,71 @@
         content="Playground, Online game, Circles, Screensaver, Circle, Fun, Fun game, Playing circles, Fun playground, Satisfying website, Satisfying game">
     <meta name="author" content="Trebka.net, Lukyn9999">
     <link rel="canonical" href="https://circle-playground.trebka.net">
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+    <script type="text/javascript" charset="utf-8" src="teavm/classes.wasm-runtime.js"></script>
+    <script>
+        async function main() {
+            let teavm = await TeaVM.wasmGC.load("teavm/classes.wasm", {
+                stackDeobfuscator: {
+                    enabled: false
+                }
+            });
+            teavm.exports.main([]);
+        }
+    </script>
+
+    <style>
+        #black-background {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-color: black;
+            background: black;
+        }
+    </style>
 </head>
 
-<body>
-    <div id="slide-menu" class="slide-menu">
-        <button id="menu-toggle">X</button>
-
-        <div id="info">
-            <h3>Welcome to Circle Playground</h3>
-            <p>You can do what you want here!</p>
-            <p>If you scroll down there are settings you can configure</p>
-            <p>Changing setting values to high number is not recomended because it can freeze your browser</p>
-            <p>Just keep in mind you have to click Apply button everytime you change settings</p>
-            <h4>Controls: </h4>
-            <p>Right click to repel circles</p>
-            <p>Left click to grab circles</p>
-            <h4>Enjoy!</h4>
-            <p>Source code is on <a href="https://github.com/Lukyn9999/circle-playground.trebka.net" target="_blank"
-                    id="github_link">github</a></p>
-        </div>
-
-        <ul>
-            <li>
-                <p>Circle count</p>
-                <input type="number" value=100 step=1 min=1 id="circle_count"><br>
-            </li>
-            <li>
-                <p>Circle speed</p>
-                <input type="number" value=0.2 step=0.1 min=0 id="circle_speed"><br>
-            </li>
-            <li>
-                <p>Circle radius</p>
-                <input type="number" value=4 step=0.5 min=0.1 id="circle_radius"><br>
-            </li>
-            <li>
-                <p>Circle connect radius</p>
-                <input type="number" value=100 step=1 min=0.1 id="circle_connect_radius"><br>
-            </li>
-            <li>
-                <p>Circle color</p>
-                <input type="color" value=#5B5B5B id="circle_color"><br>
-            </li>
-            <li>
-                <p>Circle connect color</p>
-                <input type="color" value=#CECECE id="circle_connect_color"><br>
-            </li>
-            <li>
-                <h2>Interaction</h2>
-            </li>
-            <li>
-                <p>Circle mouse repel distance</p>
-                <input type="number" value=300 step=1 min=0 id="circle_mouse_repel_distance"><br>
-            </li>
-            <li>
-                <p>Circle mouse repel friction</p>
-                <input type="number" value=0.99 step=0.01 min=0.1 id="circle_mouse_repel_friction"><br>
-            </li>
-            <li>
-                <button id="apply-btn" class="apply-btn">Apply</button>
-            </li>
-        </ul>
-
-
+<body onload="main()">
+    <div id="top-bar">
+        <button id="menu-toggle">☰</button>
+        <div class="title">Circle Playground</div>
+        <button id="apply-btn" class="apply-btn">Apply</button>
     </div>
 
+    <div id="slide-menu" class="slide-menu">
+        <div id="info" class="card">
+            <h3>Settings</h3>
+            <p>Play with circles. Adjust settings and hit Apply.</p>
+            <p>Controls:<br>Left click = grab<br>Right click = repel</p>
+        </div>
+
+        <div class="card">
+            <label id="circle_count_label">Circle count <input type="range" value="100" min="1" step="1" max="10000"
+                    id="circle_count"> </label>
+            <label id="circle_speed_label">Speed <input type="range" value="0.2" step="0.1" min="0" max="1"
+                    id="circle_speed"></label>
+            <label id="circle_radius_label">Radius <input type="range" value="4" step="0.5" min="1" max="20"
+                    id="circle_radius"></label>
+            <label id="circle_connect_radius_label">Connect radius <input type="range" value="100" step="1" min="0"
+                    max="500" id="circle_connect_radius"></label>
+            <label id="circle_friction_label">Friction <input type="range" value="0.99" step="0.01" min="0.7" max="1"
+                    id="circle_friction"></label>
+            <label id="max_circle_connections_label">Max connections <input type="range" value="3" step="1" min="0"
+                    max="25" id="max_circle_connections"></label>
+            <label id="circle_color_label">Circle color <input type="color" value="#ffffff" id="circle_color"></label>
+            <label id="circle_connect_color_label">Line color <input type="color" value="#5b5b5b"
+                    id="circle_connect_color"></label>
+            <!-- <label>Background <input type="color" value="#000000" id="background_color"></label> -->
+            <label id="circle_mouse_repel_distance_label">Mouse repel distance <input type="range" value="300" step="1"
+                    min="10" max="1000" id="circle_mouse_repel_distance"></label>
+        </div>
+    </div>
+
+    <div id="black-background"></div>
     <canvas id="canvas"></canvas>
 
-    <script src="circle-playground.js"></script>
 </body>
-
-</html>
